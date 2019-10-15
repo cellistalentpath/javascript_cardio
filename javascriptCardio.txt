@@ -149,27 +149,43 @@ console.log(flattenArray([[1, 2], [3, 4], [5, 6], [7]]));
 // Problem Four
 function isAnagram(str1, str2) {
 
+
+  anaDict1 = {};
+  anaDict2 = {};
   comp1 = str1.split("");
   comp2 = str2.split("");
 
-  if(str1.length === str2.length) {
-
-    for(i=0; i < str1.length; i++) {
-      if(!str2.includes(str1[i])) {
-        return false;
+  if(comp1.length === comp2.length) {
+    for(i=0; i < comp1.length;i++) {
+      if(comp1[i] in anaDict1) {
+        anaDict1[comp1[i]] = anaDict1[comp1[i]] + 1;
       }
-      if(!str1.includes(str2[i])) {
-        return false;
+      else {
+        anaDict1[comp1[i]] = 1;
+      }
+      if(comp2[i] in anaDict2) {
+        anaDict2[comp2[i]] = anaDict2[comp2[i]] + 1;
+      }
+      else {
+        anaDict2[comp2[i]] = 1;
       }
     }
-    return true;
 
+    for(i = 0; i < comp1.length; i++) {
+      if(anaDict1[comp1[i]] != anaDict2[comp1[i]]) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    return anaDict2;
   } else {
     return false;
   }
 }
 
-console.log(isAnagram("elbow", "below"));
+console.log(isAnagram("elbowe", "belowe"));
 
 // Problem Five
 // Assuming z is not in the string
